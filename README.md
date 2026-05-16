@@ -4,8 +4,8 @@
 
 ```bash
 # Clone the repository
-git clone <repo>
-cd appointment-app
+git clone https://github.com/georgirtodorov/gt-labforty.git
+cd gt-labforty
 
 # Copy environment file
 cp .env.example .env
