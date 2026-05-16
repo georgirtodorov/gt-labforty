@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Listeners\Appointments;
 
 use App\Events\Appointments\AppointmentCreated;
+use App\Events\Appointments\AppointmentUpdated;
 use App\Services\Notifiers\NotifierInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -22,7 +23,7 @@ class AppointmentUpdatedListener implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(AppointmentCreated $event): void
+    public function handle(AppointmentUpdated $event): void
     {
         $appointment = $event->appointment;
         $this->notifier->notify($appointment->notification_type, $appointment);
