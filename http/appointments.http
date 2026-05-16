@@ -1,0 +1,2 @@
+GET {{host}}/api/v1/appointments?date_from=2026-01-01&perPage=10&page=2
+Accept: {{accept}}

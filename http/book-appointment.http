@@ -1,0 +1,12 @@
+POST {{host}}/api/v1/appointments
+Content-Type: application/json
+Accept: {{accept}}
+
+{
+    "first_name": "Георги",
+    "last_name": "Тодоров",
+    "identifier": "9001011234",
+    "notification_type": "email",
+    "time_slot_id": 10,
+    "description": "Първичен преглед"
+}

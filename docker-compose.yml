@@ -1,0 +1,51 @@
+services:
+    gtlabfortyapp:
+        build: .
+        image: gt-labforty-app
+        container_name: gt-labforty-app
+        ports:
+            - "${APP_PORT}:8000"
+        volumes:
+            - .:/app
+            - /app/vendor
+        networks:
+            - gt-network
+        depends_on:
+            - gtlabfortymysql
+
+    gtlabfortymysql:
+        image: mysql:8
+        container_name: gt-labforty-db
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "${DB_PORT}:3306"
+        volumes:
+            - gt-mysql-data:/var/lib/mysql
+        networks:
+            - gt-network
+
+    gtlabfortypma:
+        image: phpmyadmin:latest
+        container_name: gt-labforty-pma
+        ports:
+            - "${PMA_PORT}:80"
+        environment:
+            PMA_HOST: gtlabfortymysql
+            PMA_USER: ${DB_USERNAME}
+            PMA_PASSWORD: ${DB_PASSWORD}
+        depends_on:
+            - gtlabfortymysql
+        networks:
+            - gt-network
+
+volumes:
+    gt-mysql-data:
+        name: gt-labforty-vol
+
+networks:
+    gt-network:
+        name: gt-labforty-net
